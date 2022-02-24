@@ -2,16 +2,17 @@ const path = require('path');
 
 module.exports = {
   mode: 'development',
-  entry: '/boilerplate.js',
+  entry: '/client/main.js',
   output: {
-    path: path.resolve(__dirname, 'public'),
-    filename: 'bundle.js',
+    path: path(__dirname, 'public'),
+    filename: '/public/bundle.js',
   },
   devtool: 'source-map',
   module: {
     rules: [
       {
         test: /\.jsx?$/,
+        include: path(__dirname, './client'),
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
@@ -19,6 +20,13 @@ module.exports = {
             '@babel/preset-react'
           ]
         }
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader',
+        ]
       }
     ]
   }
